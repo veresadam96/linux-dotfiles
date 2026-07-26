@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+date=();
+year="";
+month="";
+day="";
+
+escape_char=$(printf "\u1b");
+
+reset_date() {
+	date=($(date +"%Y %m %-d"));
+	year="${date[0]}";
+	month="${date[1]}";
+	day="${date[2]}";
+}
+
+change_date() {
+	#incr/decr/reset
+	operator="${1:-reset}";
+	times="${2:-1}";
+	new_date="";
+	if [ "$operator" = "reset" ]; then
+		reset_date;
+	else
+		date_seconds=$(date --date="${date[0]}-${date[1]}-${date[2]}" +%s);
+		day_seconds=86400;
+		if [ "$operator" = "decr" ]; then
+			day_seconds=$((day_seconds*-1));
+		fi
+		date=($(date --date="@$((date_seconds+day_seconds*times))" +"%Y %m %-d"));
+		year="${date[0]}";
+		month="${date[1]}";
+		day="${date[2]}";
+	fi
+}
+
+reset_date;
+while true; do
+	clear;
+
+	/bin/cal -mw "$day" "$month" "$year";
+
+	echo "up: previous month";
+	echo "down: next month";
+	echo "r: jump to today";
+	echo "q: quit";
+
+	read -r -n 1 option;
+	
+	if [ "$option" = "$escape_char" ]; then
+		read -rsn 2 option;
+	fi
+	if [ "${option}" = "[A" ]; then
+		change_date decr 31;
+	elif [ "${option}" = "[B" ]; then
+		change_date incr 31
+	elif [ "${option}" = "r" ]; then
+		reset_date;
+	elif [ "${option}" = "q" ]; then
+		exit 0;
+	fi
+done

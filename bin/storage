@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+storage_main() {
+	root=$(df -h --output=avail / | xargs | awk '{print $2}');
+	var=$(df -h --output=avail /var | xargs | awk '{print $2}');
+	home=$(df -h --output=avail /home | xargs | awk '{print $2}');
+	trash=$(du -hs ~/.local/share/Trash | xargs | awk '{print $1}');
+
+	echo "/: $root";
+	echo "/var: $var";
+	echo "/home: $home";
+	echo "trash: $trash";
+}
+
+export -f storage_main;
+watch -t -n 10 -x bash -c storage_main;

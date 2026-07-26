@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+
+filter="";
+
+page=1;
+
+copyTypes=("username" "password");
+selectedCopyType=0;
+selected=0;
+
+escape_char=$(printf "\u1b");
+
+while true; do
+	entries=$(
+		find "$HOME/.password-store" -name \*.gpg \
+			| sed "s|.gpg||" \
+			| sed "s|$HOME/.password-store/||" \
+			| sort \
+			| grep "$filter" \
+			| tr "\n" " "
+	);
+
+	list=();
+	for it in $entries; do
+		list+=("$it");
+	done
+	size="${#list[@]}";
+
+	pages=$((size/10));
+	if [ $((size%10)) -gt 0 ]; then
+		pages=$((pages+1));
+	fi
+	if [ $pages -eq 0 ]; then
+		pages=1;
+	fi
+
+	pageStartIndex=$(((page-1)*10));
+
+	pl0="${list[$((pageStartIndex))]}";
+	pl1="${list[$((pageStartIndex+1))]}";
+	pl2="${list[$((pageStartIndex+2))]}";
+	pl3="${list[$((pageStartIndex+3))]}";
+	pl4="${list[$((pageStartIndex+4))]}";
+	pl5="${list[$((pageStartIndex+5))]}";
+	pl6="${list[$((pageStartIndex+6))]}";
+	pl7="${list[$((pageStartIndex+7))]}";
+	pl8="${list[$((pageStartIndex+8))]}";
+	pl9="${list[$((pageStartIndex+9))]}";
+	options=();
+
+	[ -n "$pl0" ] && options+=("${pl0}");
+	[ -n "$pl1" ] && options+=("${pl1}");
+	[ -n "$pl2" ] && options+=("${pl2}");
+	[ -n "$pl3" ] && options+=("${pl3}");
+	[ -n "$pl4" ] && options+=("${pl4}");
+	[ -n "$pl5" ] && options+=("${pl5}");
+	[ -n "$pl6" ] && options+=("${pl6}");
+	[ -n "$pl7" ] && options+=("${pl7}");
+	[ -n "$pl8" ] && options+=("${pl8}");
+	[ -n "$pl9" ] && options+=("${pl9}");
+
+	clear;
+	echo "page: $page/$pages";
+	echo "copy: ${copyTypes[$selectedCopyType]}";
+
+	for i in "${!options[@]}"; do
+		if [ "$selected" -eq "$i" ]; then
+			echo "> ${options[$i]}";
+		else
+			echo "${options[$i]}";
+		fi
+	done
+
+	echo "---------------------------------------------";
+	echo "FILTER: ${filter}";
+	echo "---------------------------------------------";
+	echo "enter/shift+space: select entry";
+	echo "up/down: navigate between entries";
+	echo "left: previous page";
+	echo "right: next page";
+	echo "tab: change copy: username/password";
+	echo "shift+tab: quit";
+	
+	IFS=" ";
+	read -r -n 1 option;
+	if [ "$option" = "$escape_char" ]; then
+		read -rsn 2 option;
+		if [ "${option}" = "[A" ]; then
+			if [ $selected -eq 0 ]; then
+				selected=$((${#options[@]}-1));
+			else
+				selected=$((selected-1));
+			fi
+		elif [ "${option}" = "[B" ]; then
+			if [ $selected -eq $((${#options[@]}-1)) ]; then
+				selected=0;
+			else
+				selected=$((selected+1));
+			fi
+		elif [ "${option}" = "[D" ]; then
+			selected=0;
+			if [ "$page" -gt 1 ]; then
+				page=$((page-1));
+			else
+				page="$pages";
+			fi
+		elif [ "${option}" = "[C" ]; then
+			selected=0;
+			if [ "$page" -lt "$pages" ]; then
+				page=$((page+1));
+			else
+				page=1;
+			fi
+		elif [ "$option" = "[Z" ]; then
+			exit 0;
+		fi
+	else
+		#backspace
+		if [ "$option" = $'\177' ]; then
+			page=1;
+			selected=0;
+			filter=$(echo "$filter" | sed 's/.$//');
+		elif [ "$option" = $'\t' ]; then
+			selectedCopyType=$((selectedCopyType+1));
+			if [ $selectedCopyType -eq ${#copyTypes[@]} ]; then
+				selectedCopyType=0;
+			fi
+		elif [[ "$option" =~ ^[0-9a-zA-Z\./]$ ]]; then
+			page=1;
+			selected=0;
+			filter+="$option";
+		elif [ -z "$option" ]; then
+			copyType="${copyTypes[$selectedCopyType]}";
+			entryIndex=$(((page-1)*10+selected));
+			entry="${list[$entryIndex]}";
+			if [ -n "$entry" ]; then
+				# if username is selected, just return it
+				# gpg decryption is only needed for passwords
+				if [ "${copyType}" = "username" ]; then
+					echo -ne "$entry" \
+						| sed "s/.*\///g" \
+						| wl-copy -n;
+					notify-send "pass-menu - $entry" "Username copied!";
+				elif [ "${copyType}" = "password" ]; then
+					# check if gpg2 returns an error
+					# if it does, then the secret passphrase is not cached
+					if echo "1234" | gpg2 --sign --pinentry-mode error >/dev/null 2>&1; then
+						pass "$entry" | wl-copy -n;
+						notify-send "pass-menu - $entry" "Password copied!";
+					else
+						export GPG_TTY;
+						GPG_TTY=$(tty);
+						if echo "1234" | gpg2 --sign --no-tty --batch --quiet --require-secmem >/dev/null 2>&1; then
+							pass "$entry" | wl-copy -n;
+							notify-send "pass-menu - $entry" "Password copied!";
+						else
+							notify-send "pass-menu - $entry" "Authentication failure!";
+						fi
+					fi
+				fi
+			fi
+		fi
+	fi
+done

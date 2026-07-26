@@ -1,0 +1,7 @@
+input * {
+    xkb_layout hu,pl
+    xkb_variant standard
+    xkb_options grp:win_space_toggle
+}
+
+input "keyboard" xkb_model "pc102"

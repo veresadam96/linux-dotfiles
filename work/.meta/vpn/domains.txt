@@ -1,0 +1,4 @@
+10.0.0.250      example.hu
+192.168.0.102   example2.hu
+192.168.0.109   example3.hu
+192.168.0.206   example4.hu

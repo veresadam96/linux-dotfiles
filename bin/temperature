@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+temperature_main() {
+	paste \
+		<(cat /sys/class/thermal/thermal_zone*/type) \
+		<(cat /sys/class/thermal/thermal_zone*/temp) \
+		| column -s $'\t' -t \
+		| sed 's/\(.\)..$/.\1°C/';
+	echo '-------------';
+	echo '(q)uit';
+}
+
+export -f temperature_main;
+watch -t -n 1 -x bash -c temperature_main;

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 || -z $2 ]]; then
+	echo "usage: regex-replace <string to replace> <replacement>";
+	exit 1;
+fi
+find ./ -type f -exec sed -i "s/${1}/${2}/gI" {} \;

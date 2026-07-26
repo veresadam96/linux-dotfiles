@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd);
+current_partition="$(df $script_dir | grep /dev | awk '{print $1}')";
+
+is_mount_list=false;
+selected=0;
+escape_char=$(printf "\u1b");
+
+block_dev_nodes=("sda" "sdb" "sdc" "sdd" "nvme0n1" "nvme0n2");
+options=();
+
+add_block_device_option() {
+	device="$1";
+	dev_id=$(
+		udisksctl info -b "${device}" \
+			| grep "IdUUID:" \
+			| sed "s|IdUUID:||g" \
+			| sed -E "s/[ \t]*([a-zA-Z0-9]*.*[a-zA-Z0-9]*)[ \t]*/\1/g"
+	);
+	options+=("${device} - ${dev_id}");
+}
+
+collect_block_devices_for_unmount() {
+	for dev_node in "${block_dev_nodes[@]}"; do
+		if ! [[ "$current_partition" == *"$dev_node"* ]]; then
+			device=$(mount | grep -Eo "/dev/${dev_node}[^ ]*");
+			if [ -n "$device" ]; then
+				add_block_device_option "${device}";
+			fi
+		fi
+	done
+}
+
+collect_block_devices_for_mount() {
+	unmounted_partitions=($(lsblk -ln -o NAME --filter 'MOUNTPOINT !~ ".+" && TYPE == "part"' | xargs));
+	for part in "${unmounted_partitions[@]}"; do
+		device="/dev/$part";
+		add_block_device_option "${device}";
+	done
+}
+
+collect_iphone_device_options_for_unmount() {
+	ifuse_devices=("$(mount | grep -Eo 'ifuse on [^ ]*' | sed 's|ifuse on|iphone -|g')");
+	for device in "${ifuse_devices[@]}"; do
+		if [ -n "$device" ]; then
+			options+=("${device}");
+		fi
+	done
+}
+
+unmount_block() {
+	unmount_success=true;
+	udisksctl unmount -b $1 || unmount_success=false;
+
+	if [ "${unmount_success}" = true ]; then
+		notify-send "Unmount - $1" "You can now remove the device.";
+	else
+		sleep 5;
+	fi
+}
+
+mount_block() {
+	mount_success=true;
+	udisksctl mount -b $1 || mount_success=false;
+
+	if [ "${mount_success}" = true ]; then
+		mountpoint=$(mount | grep "$1" | awk -F' ' '{print $3}');
+		notify-send "Mount - $1" "$mountpoint";
+	else
+		sleep 5;
+	fi
+}
+
+unmount_iphone() {
+	unmount_success=true;
+	iphone_mount=${1//iphone - /};
+	fusermount -u "$iphone_mount" || unmount_success=false;
+	if [ "$unmount_success" = true ]; then
+		notify-send "Unmount iPhone - $iphone_mount";
+	else
+		sleep 5;
+	fi
+}
+
+print_options() {
+	for (( i=0; i<${#options[@]}; i++ )); do
+		if [ $selected -eq $i ]; then
+			echo "> ${options[$i]}";
+		else
+			echo "${options[$i]}";
+		fi
+	done
+}
+
+while true; do
+	options=();
+	if [ "$is_mount_list" = true ]; then
+		collect_block_devices_for_mount;
+	else
+		collect_block_devices_for_unmount;
+		collect_iphone_device_options_for_unmount;
+	fi
+	
+	clear;
+	if [ "$is_mount_list" = true ]; then
+		echo "Mount devices";
+	else
+		echo "Unmount devices";
+	fi
+	echo "--------------------------------";
+	echo "up/down: navigate between entries";
+	echo "left/right: flip MOUNT/UNMOUNT page";
+	echo "enter: mount/unmount";
+	echo "1: pair/unpair iPhone";
+	echo "q: quit";
+
+	echo "--------------------------------";
+	print_options;
+	echo "--------------------------------";
+	
+	IFS=" ";
+	read -r -p "Select option: " -n 1 option;
+	if [ "$option" = "$escape_char" ]; then
+		read -rsn 2 option;
+	fi
+	
+	if [ "${option}" = "[A" ]; then
+		if [ $selected -eq 0 ]; then
+			selected=$((${#options[@]}-1));
+		else
+			selected=$((selected-1));
+		fi
+	elif [ "${option}" = "[B" ]; then
+		if [ $selected -eq $((${#options[@]}-1)) ]; then
+			selected=0;
+		else
+			selected=$((selected+1));
+		fi
+	elif [ "$option" = "[C" ] || [ "$option" = "[D" ]; then
+		selected=0;
+		if [ "$is_mount_list" = true ]; then
+			is_mount_list=false;
+		else
+			is_mount_list=true;
+		fi
+	elif [ "$option" = "1" ]; then
+		echo;
+		if [ "$is_mount_list" = true ]; then
+			echo "pair: $(/bin/idevicepair pair)";
+		else
+			echo "unpair: $(/bin/idevicepair unpair)";
+		fi
+		echo "validate: $(/bin/idevicepair validate)";
+		sleep 2;
+	elif [ "$option" = "q" ]; then
+		exit 0;
+	elif [ -z "$option" ] && [ "${#options[@]}" -gt 0 ]; then
+		if [ "$is_mount_list" = true ]; then
+			mount_block "${options[$selected]}";
+		else
+			if [[ "${options[$selected]}" == iphone* ]]; then
+				unmount_iphone "${options[$selected]}";
+			else
+				unmount_block "${options[$selected]}";
+			fi
+		fi
+	fi
+done

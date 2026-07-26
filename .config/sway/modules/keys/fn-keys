@@ -1,0 +1,39 @@
+bindsym XF86AudioMute exec \
+    pactl set-sink-mute @DEFAULT_SINK@ toggle \
+    && notify-send -c system-parameter $(pactl get-sink-mute @DEFAULT_SINK@ | grep -oE "no|yes" | sed s/yes/🔈/g | sed s/no/🔊/g) \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym XF86AudioLowerVolume exec \
+    pactl set-sink-volume @DEFAULT_SINK@ -5% \
+    && notify-send -c system-parameter "🔊" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym XF86AudioRaiseVolume exec \
+    pactl set-sink-volume @DEFAULT_SINK@ +5% \
+    && notify-send -c system-parameter "🔊" "$(pactl get-sink-volume @DEFAULT_SINK@ | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym XF86AudioMicMute exec \
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle \
+    && notify-send -c system-parameter $(pactl get-source-mute @DEFAULT_SOURCE@ | grep -oE 'no|yes' | sed s/yes/🎤x/g | sed s/no/🎤/g) \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym $mod+f11 exec \
+    pactl set-source-volume @DEFAULT_SOURCE@ -5% \
+    && notify-send -c system-parameter "🎤" "$(pactl get-source-volume @DEFAULT_SOURCE@ | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym $mod+f12 exec \
+    pactl set-source-volume @DEFAULT_SOURCE@ +5% \
+    && notify-send -c system-parameter "🎤" "$(pactl get-source-volume @DEFAULT_SOURCE@ | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+2 i3blocks
+
+bindsym XF86MonBrightnessDown exec \
+    brightnessctl set 5%- \
+    && notify-send -c system-parameter "🔆" "$(brightnessctl | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+1 i3blocks
+
+bindsym XF86MonBrightnessUp exec \
+    brightnessctl set 5%+ \
+    && notify-send -c system-parameter "🔆" "$(brightnessctl | grep -m 1 -oE [0-9]+% | head -n 1)" \
+    && pkill -SIGRTMIN+1 i3blocks

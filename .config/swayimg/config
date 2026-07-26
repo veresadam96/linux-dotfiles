@@ -1,0 +1,26 @@
+[font]
+name=Roboto
+size=14
+color=#ffffff
+
+[info]
+info_timeout=3
+
+[list]
+all=yes
+
+[viewer]
+window=#000000CC
+
+[gallery]
+window=#000000CC
+shadow=#00000000
+
+[keys.viewer]
+Right=next_file
+Left=prev_file
+MouseRight=exit
+
+[keys.gallery]
+Backspace=exec rm "%"
+Delete=exec rm "%"

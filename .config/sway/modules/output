@@ -1,0 +1,3 @@
+output * bg $HOME/.config/sway/backgrounds/bg-current fill
+output $out-pri resolution $out-pri-res-x$out-res-sep$out-pri-res-y scale $out-pri-scale position $out-pri-pos-x $out-pri-pos-y
+output $out-sec resolution $out-sec-res-x$out-res-sep$out-sec-res-y scale $out-sec-scale position $out-sec-pos-x $out-sec-pos-y

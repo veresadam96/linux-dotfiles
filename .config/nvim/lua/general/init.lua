@@ -1,0 +1,5 @@
+require("general.autocmd")
+require("general.options")
+require("general.filetypes")
+require("general.statusline")
+require("general.netrw")

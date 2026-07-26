@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [ ! -s ~/.config/mpd/pid ];
+then
+	mpd;
+	mpc update;
+	mpc clear;
+	mpc add /;
+	mpc play;
+	mpc repeat;
+	mpc pause;
+	if [ -e ~/bin/mpd-listener ];
+	then
+		/bin/mpd-mpris & disown;
+		/bin/mpris-proxy & disown;
+		~/bin/mpd-listener & disown;
+	fi
+	pkill -SIGRTMIN+3 i3blocks;
+else
+	pkill mpd-mpris;
+	pkill mpris-proxy;
+	mpd --kill;
+	pkill -SIGRTMIN+3 i3blocks;
+fi
+

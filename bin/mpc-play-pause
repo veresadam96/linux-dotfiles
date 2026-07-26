@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if ! [ -s ~/.config/mpd/pid ]; then
+	echo "mpd is off";
+fi
+mpc toggle >/dev/null 2>&1;
+pkill -SIGRTMIN+3 i3blocks;

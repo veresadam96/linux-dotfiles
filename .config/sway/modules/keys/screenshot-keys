@@ -1,0 +1,24 @@
+# Special keys to take screenshots with grim
+bindsym Mod1+Q exec \
+    grim -g "$(slurp)" - | wl-copy \
+    && notify-send "GRIM" "Region clip copied to clipboard!"
+
+bindsym Mod1+Shift+Q exec \
+    grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y%m%d_%H%M%S_grim.png') \
+    && notify-send "GRIM" "Region clip saved to pictures"
+
+bindsym Print+1 exec sh -c \
+	'grim -g "$out-pri-pos-x$out-pos-sep$out-pri-pos-y $out-pri-res-x$out-res-sep$out-pri-res-y" $(xdg-user-dir PICTURES)/$(date +"%Y%m%d_%H%M%S_grim.png") \
+	&& notify-send "GRIM" "$out-pri full screenshot saved to pictures"'
+
+bindsym Print+2 exec sh -c \
+	'grim -g "$out-sec-pos-x$out-pos-sep$out-sec-pos-y $out-sec-res-x$out-res-sep$out-sec-res-y" $(xdg-user-dir PICTURES)/$(date +"%Y%m%d_%H%M%S_grim.png") \
+	&& notify-send "GRIM" "$out-sec full screenshot saved to pictures"'
+
+bindsym Print+Mod1+1 exec sh -c \
+	'grim -g "$out-pri-pos-x$out-pos-sep$out-pri-pos-y $out-pri-res-x$out-res-sep$out-pri-res-y" - | wl-copy \
+	&& notify-send "GRIM" "$out-pri full screenshot copied to clipboard"'
+
+bindsym Print+Mod1+2 exec sh -c \
+	'grim -g "$out-sec-pos-x$out-pos-sep$out-sec-pos-y $out-sec-res-x$out-res-sep$out-sec-res-y" - | wl-copy \
+	&& notify-send "GRIM" "$out-sec full screenshot copied to clipboard"'

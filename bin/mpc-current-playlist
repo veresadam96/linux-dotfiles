@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+current="$(mpc -f "%file%" playlist | sha512sum )"
+
+mpc lsplaylist | while read line
+do
+    i="$(mpc -f "%file%" playlist $line | sha512sum )"
+    if [ "$i" = "$current" ]; then
+        echo "$line"
+        exit 0;
+    fi
+done

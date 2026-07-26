@@ -1,0 +1,33 @@
+# Mod4 -> win key; Mod1 -> alt
+set $mod Mod4
+
+# terminal emulator
+set $term foot
+
+# menu command
+set $menu fuzzel
+
+# directions
+set $left h
+set $down j
+set $up k
+set $right l
+
+# outputs
+set $out-res-sep x
+set $out-pos-sep ,
+#    primary
+set $out-pri eDP-1
+set $out-pri-res-x 1920
+set $out-pri-res-y 1200
+set $out-pri-scale 1
+set $out-pri-pos-x 0
+set $out-pri-pos-y 0
+#    secondary
+set $out-sec DP-2
+set $out-sec-res-x 1920
+set $out-sec-res-y 1080
+set $out-sec-scale 1
+set $out-sec-pos-x 1920
+# set $out-sec-pos-x 0
+set $out-sec-pos-y 0

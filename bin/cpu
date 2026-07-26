@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+cpu_main() {
+	IFS=' ' read -r -a CPU0_1 <<< "$(awk '/cpu0 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU1_1 <<< "$(awk '/cpu1 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU2_1 <<< "$(awk '/cpu2 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU3_1 <<< "$(awk '/cpu3 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+
+	sleep 1;
+
+	IFS=' ' read -r -a CPU0_2 <<< "$(awk '/cpu0 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU1_2 <<< "$(awk '/cpu1 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU2_2 <<< "$(awk '/cpu2 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+	IFS=' ' read -r -a CPU3_2 <<< "$(awk '/cpu3 /{print $2+$4,$2+$4+$5}' /proc/stat)";
+
+	CPU0=$((100*(CPU0_2[0]-CPU0_1[0])/(CPU0_2[1]-CPU0_1[1]+1)));
+	CPU1=$((100*(CPU1_2[0]-CPU1_1[0])/(CPU1_2[1]-CPU1_1[1]+1)));
+	CPU2=$((100*(CPU2_2[0]-CPU2_1[0])/(CPU2_2[1]-CPU2_1[1]+1)));
+	CPU3=$((100*(CPU3_2[0]-CPU3_1[0])/(CPU3_2[1]-CPU3_1[1]+1)));
+
+	echo "0: ${CPU0}%";
+	echo "1: ${CPU1}%";
+	echo "2: ${CPU2}%";
+	echo "3: ${CPU3}%";
+	echo "(q)uit";
+}
+
+export -f cpu_main;
+watch -t -n 0 -x bash -c cpu_main;

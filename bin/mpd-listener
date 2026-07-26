@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+while [ -s ~/.config/mpd/pid ];
+do
+    mpc idle player > /dev/null 2>&1;
+    pkill -SIGRTMIN+3 i3blocks;
+done

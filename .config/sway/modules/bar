@@ -1,0 +1,18 @@
+bar {
+	status_command i3blocks
+	#output $out-pri
+	font pango:Roboto 11
+	separator_symbol ""
+	pango_markup enabled
+
+	position top
+	status_edge_padding 5
+	status_padding 2
+
+	colors {
+		statusline #dddddd
+		background #111111d9
+		focused_workspace #cdd6f4 #5c5c5c #fbfbfb
+		inactive_workspace #000000 #000000 #fbfbfb
+	}
+}

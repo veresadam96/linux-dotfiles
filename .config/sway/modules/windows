@@ -1,0 +1,49 @@
+# window borders
+default_border pixel 1
+default_floating_border pixel 1
+focus_follows_mouse yes
+smart_borders on
+smart_gaps on
+gaps inner 0
+
+# window border colors
+client.focused #cc6699 #cc6699 #fbfbfb
+client.focused_inactive #260d1a #260d1a #fbfbfb
+client.unfocused #1d1d1d #1d1d1d #fbfbfb
+
+for_window {
+	[title="File*" app_id="firefox"] resize set height 680px
+
+	#xwayland app title helper
+	[shell="xwayland"] title_format "[XWayland] %title"
+
+	[app_id="pavucontrol"] floating enable, sticky enable
+	[app_id="pavucontrol"] resize set width 800px height 500px, move position 100ppt 0, move left 800px
+
+	[app_id="gpg-pinentry-curses"] floating enable
+
+	[app_id="i3blocks-media"] floating enable, sticky enable
+	[app_id="i3blocks-media"] resize set width 50ppt height 100ppt, move position 50ppt 0
+
+	[app_id="i3blocks-calendar"] floating enable, sticky enable
+	[app_id="i3blocks-calendar"] resize set width 350px height 100ppt, move position 100ppt 0, move left 350
+
+	[app_id="i3blocks-cpu"] floating enable, sticky enable
+	[app_id="i3blocks-cpu"] resize set width 200px height 200px, move position 100ppt 0, move left 200px
+
+	[app_id="i3blocks-temperature"] floating enable, sticky enable
+	[app_id="i3blocks-temperature"] resize set width 300px height 350px, move position 100ppt 0, move left 300px
+
+	[app_id="i3blocks-network-list"] floating enable, sticky enable
+	[app_id="i3blocks-network-list"] resize set width 100ppt height 100ppt
+
+	[app_id="i3blocks-ram"] floating enable
+	[app_id="i3blocks-ram"] resize set width 75ppt height 80ppt
+
+	[app_id="i3blocks-stats"] floating enable, sticky enable
+	[app_id="i3blocks-stats"] resize set width 400px height 300px, move position 100ppt 0, move left 400px
+
+	[app_id="i3blocks-storage"] floating enable, sticky enable
+	[app_id="i3blocks-storage"] resize set width 300px height 300px, move position 100ppt 0, move left 300px
+
+}

@@ -1,0 +1,15 @@
+include /etc/sway/config.d/*
+
+include $HOME/.config/sway/modules/global
+include $HOME/.config/sway/modules/variables
+
+include $HOME/.config/sway/modules/output
+include $HOME/.config/sway/modules/input
+
+include $HOME/.config/sway/modules/windows
+
+include $HOME/.config/sway/modules/workspaces
+
+include $HOME/.config/sway/modules/bar
+
+include $HOME/.config/sway/modules/keys/*

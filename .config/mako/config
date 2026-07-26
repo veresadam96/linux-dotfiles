@@ -1,0 +1,20 @@
+max-history=0
+default-timeout=5000
+group-by=category
+background-color=#111133AA
+border-color=#111133AA
+border-radius=8
+font=Roboto 14
+
+[category="system-parameter"]
+background-color=#111111AA
+border-color=#111111AA
+font=Roboto 14
+text-alignment=center
+anchor=center
+default-timeout=1500
+width=100
+layer=overlay
+
+[grouped]
+format=<b>%s</b>\n%b

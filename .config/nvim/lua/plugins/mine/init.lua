@@ -1,0 +1,7 @@
+require("plugins.mine.floating_terminal")
+require("plugins.mine.nnn")
+require("plugins.mine.fzf")
+require("plugins.mine.livegrep")
+require("plugins.mine.bufview")
+require("plugins.mine.bufdel")
+--require("plugins.mine.workspace_diagnostics")

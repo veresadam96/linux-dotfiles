@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+
+if ! [ -s ~/.config/mpd/pid ]; then
+	echo "mpd is off";
+	exit 1;
+fi
+
+page=1;
+
+show_queue=0;
+page_playlist_limit=4;
+queue_page=1;
+queue_preview_limit=5;
+declare -i queue_preview_lower_end;
+declare -i queue_preview_upper_end;
+
+selected=0;
+escape_char=$(printf "\u1b");
+
+while true; do
+	list=();
+	for it in $(mpc lsplaylist | sort); do
+		list+=("$it");
+	done
+	size="${#list[@]}";
+
+	pages=$((size / page_playlist_limit));
+	if [ $((size % page_playlist_limit)) -gt 0 ]; then
+		pages=$((pages+1));
+	fi
+	if [ $pages -eq 0 ]; then
+		pages=1;
+	fi
+
+	pageStartIndex=$(((page - 1) * page_playlist_limit));
+
+	options=();
+	options+=("all songs");
+	for ((i=0;i<page_playlist_limit;i++)); do
+		[ -n "${list[$((pageStartIndex + i))]}" ] && options+=("${list[$((pageStartIndex + i))]}");
+	done
+
+	playlist="";
+	songs=();
+	all_songs=();
+
+	if [ $selected -gt 0 ]; then
+		playlist="${options[$selected]}";
+	fi
+
+	OLDIFS="$IFS";
+	IFS=$'\n';
+	ext_regex="\(mp3\|mp4\|wav\|avi\|opus\|webp\|webm\|m4a\)";
+	if [ $selected -gt 0 ]; then
+		all_songs=($(mpc playlist $playlist | sed "s/\.$ext_regex//g"));
+	else
+		all_songs=($(mpc listall | sed "s/\.$ext_regex//g"));
+	fi
+
+	for i in "${!all_songs[@]}"; do
+		if [ $i -ge $(((queue_page-1)*queue_preview_limit)) ]; then
+			if [ ${#songs[@]} -eq $queue_preview_limit ]; then
+				break;
+			fi
+			songs+=("${all_songs[$i]}");
+		fi
+	done
+
+	queue_preview_lower_end=$(((queue_page-1)*queue_preview_limit+1));
+	if [ $((queue_preview_lower_end+queue_preview_limit)) -le ${#all_songs[@]} ]; then
+		queue_preview_upper_end=$((queue_preview_lower_end+queue_preview_limit-1));
+	else
+		queue_preview_upper_end=${#all_songs[@]};
+	fi
+	
+	IFS="$OLDIFS";
+	
+	clear;
+	for i in "${!options[@]}"; do
+		if [ "$selected" -eq "$i" ]; then
+			echo "> $((i+1)). ${options[$i]}";
+		else
+			echo "$((i+1)). ${options[$i]}";
+		fi
+	done
+	echo "---------------------------";
+	echo "page: $page/$pages";
+	echo "arrows: navigate/flip pags";
+	echo "enter: select entry";
+	echo "tab: next queue preview page";
+	echo "s: show/hide queue";
+	echo "d: delete playlist";
+	echo "q: exit";
+
+	if [ $show_queue -eq 1 ]; then
+		echo "---------------------------";
+		echo "${queue_preview_lower_end}-${queue_preview_upper_end}/${#all_songs[@]} songs:";
+		for i in "${!songs[@]}"; do
+			echo "${songs[$i]}";
+		done
+	fi
+	echo "---------------------------";
+
+	OLDIFS="$IFS";
+	IFS=" ";
+	read -r -p "Select option: " -n 1 option;
+	if [ "$option" = "$escape_char" ]; then
+		read -rsn 2 option;
+		if [ "${option}" = "[A" ]; then
+			queue_page=1;
+			if [ $selected -eq 0 ]; then
+				selected=$((${#options[@]}-1));
+			else
+				selected=$((selected-1));
+			fi
+		elif [ "${option}" = "[B" ]; then
+			queue_page=1;
+			if [ $selected -eq $((${#options[@]}-1)) ]; then
+				selected=0;
+			else
+				selected=$((selected+1));
+			fi
+		elif [ "${option}" = "[C" ]; then
+			queue_page=1;
+			selected=0;
+			if [ "$page" -lt "$pages" ]; then
+				page=$((page+1));
+			fi
+		elif [ "${option}" = "[D" ]; then
+			queue_page=1;
+			selected=0;
+			if [ "$page" -gt 1 ]; then
+				page=$((page-1));
+			fi
+		fi
+	else
+		if [ "$option" = "q" ]; then
+			exit 0;
+		elif [ "$option" = "d" ]; then
+			if ! [ $selected -eq 0 ]; then
+				echo;
+				read -r -p "Confirm playlist ($playlist) deletion? (y to delete): " -n 1 option;
+				if [ "$option" = "y" ]; then
+					mpc rm $playlist;
+					selected=0;
+					queue_page=1;
+				fi
+			fi
+		elif [ "$option" = "s" ]; then
+			if [ $show_queue -eq 0 ]; then
+				show_queue=1;
+			else
+				show_queue=0;
+			fi
+		elif [ "$option" = $'\t' ]; then
+			if [ $((queue_page*queue_preview_limit)) -ge ${#all_songs[@]} ]; then
+				queue_page=1;
+			else
+				queue_page=$((queue_page+1));
+			fi
+		elif [ -z "${option}" ]; then
+			mpc clear >/dev/null 2>&1;
+			if [ $selected -eq 0 ]; then
+				mpc add / >/dev/null 2>&1;
+			else
+				mpc load "$playlist" >/dev/null 2>&1;
+			fi
+			mpc play >/dev/null 2>&1;
+			pkill -SIGRTMIN+3 i3blocks;
+		fi
+	fi
+	IFS="$OLDIFS";
+done

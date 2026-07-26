@@ -1,0 +1,18 @@
+#!/sbin/openrc-run
+
+description="Enable WiFi device"
+
+depend() {
+    need localmount
+    after bootmisc
+}
+
+start() {
+    ebegin "Enabling WiFi"
+
+    sleep 1
+    /usr/sbin/rfkill unblock wifi 2>/dev/null
+    /usr/bin/iwctl device wlan0 set-property Powered on 2>/dev/null
+
+    eend 0
+}

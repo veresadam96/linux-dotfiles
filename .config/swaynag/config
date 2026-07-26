@@ -1,0 +1,13 @@
+[warning]
+button-background=111111
+button-text=dddddd
+button-gap=15
+
+background=111111
+border-bottom=260d1a
+border-bottom-size=1
+border=111111
+button-border-size=1
+text=dddddd
+message-padding=10
+button-padding=7

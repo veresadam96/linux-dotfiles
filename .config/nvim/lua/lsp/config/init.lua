@@ -1,0 +1,13 @@
+local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+require("lsp.config.bashls").enable(capabilities)
+require("lsp.config.html").enable(capabilities)
+require("lsp.config.cssls").enable(capabilities)
+require("lsp.config.tailwindcss").enable(capabilities)
+require("lsp.config.eslint").enable(capabilities)
+require("lsp.config.ts_ls").enable(capabilities)
+require("lsp.config.angularls").enable(capabilities)
+require("lsp.config.pylsp").enable(capabilities)
+require("lsp.config.lua_ls").enable(capabilities)
+require("lsp.config.vue_ls").enable(capabilities)
+require("lsp.config.jdtls").setup(capabilities)
