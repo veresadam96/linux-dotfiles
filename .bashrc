@@ -36,6 +36,8 @@ fi
 #UTILS
 alias passgen='shuf -n 4 ~/.config/.meta/passgen-words.txt | tr -d "\n" | tr "\r" " " | rev | cut -c 2- | rev';
 alias passgen-copy='passgen | wl-copy -n';
+alias dotfiles='git --git-dir=$HOME/.dotfiles --work-tree=$HOME';
+alias lazygit-dotfiles='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME';
 
 #PACMAN (just notes)
 alias pacman-list-export='pacman -Qqe > packagelist.txt';

@@ -69,3 +69,4 @@
 /.config/vercel-plugin
 /.config/.meta/*.gpg.key
 /.config/nvim/lazy-lock.json
+/.dotfiles
