@@ -76,20 +76,15 @@ vim.o.diffopt = "vertical"
 
 --rounded borders (for blink.cmp)
 vim.o.winborder = 'rounded'
---Color theme specials
-vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
 
---...OR Load transparent colors after UI is fully loaded
---[[
+-- Load transparent colors after UI is fully loaded
 vim.schedule(function()
-	vim.cmd('colorscheme lunaperche')
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 	vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 end)
-]]--
 --[[ for colors
 	"Normal",
 	"NormalNC",
