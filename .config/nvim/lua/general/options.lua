@@ -74,7 +74,11 @@ vim.o.laststatus = 2
 -- Options for diff mode
 vim.o.diffopt = "vertical"
 
--- Load transparent colors after UI is fully loaded
+--Color theme specials
+vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
+
+--...OR Load transparent colors after UI is fully loaded
+--[[
 vim.schedule(function()
 	vim.cmd('colorscheme lunaperche')
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -83,6 +87,7 @@ vim.schedule(function()
 	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 	vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 end)
+]]--
 --[[ for colors
 	"Normal",
 	"NormalNC",

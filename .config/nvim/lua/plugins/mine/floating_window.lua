@@ -15,8 +15,7 @@ function M.create_floating_window(opts)
 		height = height,
 		col = col,
 		row = row,
-		style = "minimal",
-		border = "shadow"
+		border = "rounded"
 	}
 	local win = vim.api.nvim_open_win(buf, true, win_config)
 	return { buf = buf, win = win }
