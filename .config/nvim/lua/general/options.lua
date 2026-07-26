@@ -74,6 +74,8 @@ vim.o.laststatus = 2
 -- Options for diff mode
 vim.o.diffopt = "vertical"
 
+--rounded borders (for blink.cmp)
+vim.o.winborder = 'rounded'
 --Color theme specials
 vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })
 

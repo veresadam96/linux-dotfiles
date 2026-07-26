@@ -9,7 +9,13 @@ return {
 		opts = {
 			keymap = { preset = "none" },
 			completion = {
-				documentation = { auto_show = false, auto_show_delay_ms = 500 },
+				documentation = {
+					auto_show = false,
+					auto_show_delay_ms = 500,
+				},
+				menu = {
+					winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
+				},
 			},
 			snippets = { preset = "luasnip" },
 			sources = {
@@ -17,7 +23,9 @@ return {
 			},
 			fuzzy = { implementation = "lua" },
 			-- Shows a signature help window while you type arguments for a function
-			signature = { enabled = true },
+			signature = {
+				enabled = true,
+			},
 		},
 		config = function(_, opts)
 			require("blink.cmp").setup(opts)
