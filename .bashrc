@@ -72,7 +72,3 @@ if [[ -z $WAYLAND_DISPLAY ]] && [[ -n $XDG_VTNR ]] && [[ $XDG_VTNR -eq 1 ]]; the
 	# Launch Sway with a D-Bus server
 	exec dbus-run-session sway "$@";
 fi
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
