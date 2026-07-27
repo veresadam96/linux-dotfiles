@@ -6,6 +6,7 @@ require("lazy").setup({
 	require("plugins.lazy.plugins.nvim-dap"),
 	require("plugins.lazy.plugins.nvim-jdtls"),
 	require("plugins.lazy.plugins.lint"),
+	require("plugins.lazy.plugins.catpuccin"),
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {

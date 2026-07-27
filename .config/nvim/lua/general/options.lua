@@ -77,13 +77,14 @@ vim.o.diffopt = "vertical"
 --rounded borders (for blink.cmp)
 vim.o.winborder = 'rounded'
 
--- Load transparent colors after UI is fully loaded
+-- Load colors after UI is fully loaded
 vim.schedule(function()
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-	vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+	vim.cmd("colorscheme catppuccin-mocha")
+	--vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
 end)
 --[[ for colors
 	"Normal",
