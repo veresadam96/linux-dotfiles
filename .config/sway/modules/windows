@@ -3,8 +3,8 @@ default_border pixel 1
 default_floating_border pixel 1
 focus_follows_mouse yes
 smart_borders on
-smart_gaps on
-gaps inner 0
+#smart_gaps on
+gaps inner 10
 
 # window border colors
 client.focused #cc6699 #cc6699 #fbfbfb
