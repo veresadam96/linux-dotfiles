@@ -7,6 +7,9 @@ local M = {}
 function M.enable(capabilities)
 	local lsp = "vue_ls"
 	local ls_path = utils.node.resolve_package("@vue/language-server")
+	if not ls_path then
+		return
+	end
 
 	local cmd = {
 		"node",
