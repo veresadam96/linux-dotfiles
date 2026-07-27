@@ -44,6 +44,8 @@
 /work/*
 !/work/.*
 /work/.meta/admin
+/work/.meta/nvim/java/*.tar.gz
+/work/.meta/nvim/java/*.jar
 /.config/create-next-app-nodejs
 /.config/chromium
 /.config/QtProject.conf
