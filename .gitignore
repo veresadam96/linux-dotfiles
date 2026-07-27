@@ -8,7 +8,7 @@
 /.git-credentials
 /.gnupg/private-keys-v1.d
 /.gnupg/crls.d
-/.gnupg/.#lk0x000055ac2b748220.workstation.home.19689
+/.gnupg/.*
 /.gnupg/pubring.kbx
 /.gradle
 /.gnupg/pubring.kbx~
@@ -72,3 +72,16 @@
 /.config/.meta/*.gpg.key
 /.config/nvim/lazy-lock.json
 /.dotfiles
+/.android
+/.aws
+/.config/google-chrome
+/.config/envman
+/.config/helm
+/.config/jgit
+/.docker
+/.eclipse/org.jkiss.dbeaver.product_26.1.0_1078795723_linux_gtk_x86_64/configuration
+/.kube
+/.tilt-dev
+/aws
+/awscliv2.zip
+/gchrome/google-chrome
