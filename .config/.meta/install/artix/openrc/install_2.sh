@@ -31,7 +31,7 @@ packages() {
 	#kernel
 	packages+=("base-devel" "linux-lts");
 	#utilities
-	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "cronie" "ntp" "htop");
+	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "cronie" "ntp" "htop" "libinput" "libinput-tools");
 	#CD/DVD
 	packages+=("cdrtools" "cdrdao" "libcdio" "libdvdread" "libdvdcss" "libdvdnav");
 	#manual
