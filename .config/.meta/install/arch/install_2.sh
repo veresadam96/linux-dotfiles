@@ -175,6 +175,7 @@ dhcpcd() {
 	fi
 }
 
+#special kernel param for new lenovo ideapad: pcie_port_pm=off
 grub() {
 	if ! grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB; then
 		echo "grub-install: FAIL";
