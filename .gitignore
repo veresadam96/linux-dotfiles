@@ -4,7 +4,7 @@
 /.cache
 /.claude
 /.claude.json
-/.eclipse/org.jkiss.dbeaver.product_26.0.0_1078795723_linux_gtk_x86_64/configuration
+/.eclipse
 /.git-credentials
 /.gnupg/private-keys-v1.d
 /.gnupg/crls.d
