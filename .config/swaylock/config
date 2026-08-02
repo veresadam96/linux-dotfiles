@@ -1,0 +1,4 @@
+image=/home/vadam/.config/sway/backgrounds/bg-current
+ignore-empty-password
+show-failed-attempts
+daemonize
