@@ -20,7 +20,7 @@ packages() {
 	#kernel
 	packages+=("base-devel" "linux-lts");
 	#utilities
-	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "htop" "libinput" "libinput-tools" "fwupd" "innoextract");
+	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "htop" "libinput" "libinput-tools" "fwupd" "innoextract" "binwalk");
 	#CD/DVD
 	packages+=("cdrtools" "cdrdao" "libcdio" "libdvdread" "libdvdcss" "libdvdnav");
 	#manual
