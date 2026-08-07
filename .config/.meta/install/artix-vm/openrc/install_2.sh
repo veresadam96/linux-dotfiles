@@ -31,7 +31,7 @@ packages() {
 	#kernel
 	packages+=("base-devel");
 	#utilities
-	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "cronie" "ntp" "cryptsetup" "htop" "libinput" "libinput-tools");
+	packages+=("sudo" "ripgrep" "fd" "zip" "unzip" "unrar" "fzf" "bat" "fastfetch" "fuse" "atool" "tmux" "usbutils" "jq" "cronie" "ntp" "cryptsetup" "htop" "libinput" "libinput-tools" "cloud-guest-utils");
 	#manual
 	packages+=("man-db" "man-pages");
 	#kernel booter
