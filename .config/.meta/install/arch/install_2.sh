@@ -93,6 +93,8 @@ packages() {
 	packages+=("qt6-base" "qt6-wayland");
 	#gtk
 	packages+=("gtk3" "gtk4" "gnome-themes-extra" "zenity");
+	#qt
+	packages+=("qt6ct");
 	#rdp
 	packages+=("freerdp");
 	#vm

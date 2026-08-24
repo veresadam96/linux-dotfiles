@@ -63,7 +63,7 @@ packages() {
 	#file system managers
 	packages+=("udisks2");
 	#browsers
-	packages+=("firefox" "ungoogled-chromium");
+	packages+=("firefox" "ungoogled-chromium" "falkon");
 	#fonts
 	packages+=("ttf-font-awesome" "ttf-roboto" "noto-fonts" "noto-fonts-emoji" "noto-fonts-extra" "noto-fonts-cjk" "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-mono" "ttf-jetbrains-mono" "ttf-liberation");
 	#dev-general
@@ -98,6 +98,8 @@ packages() {
 	packages+=("qt6-base" "qt6-wayland");
 	#gtk
 	packages+=("gtk3" "gtk4" "gnome-themes-extra" "zenity");
+	#qt
+	packages+=("qt6ct");
 	#rdp
 	packages+=("freerdp");
 	#freedesktop/xdg

@@ -24,6 +24,7 @@ export NNN_PREVIEWIMGPROG='img2sixel';
 
 #for android studio avd gui - cant handle wayland yet
 export QT_QPA_PLATFORM=xcb;
+export QT_QPA_PLATFORMTHEME=qt6ct;
 
 alias ls='ls --color=auto';
 alias grep='grep --color=auto';
