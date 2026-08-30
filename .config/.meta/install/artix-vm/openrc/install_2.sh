@@ -63,7 +63,7 @@ packages() {
 	#file system managers
 	packages+=("udisks2");
 	#browsers
-	packages+=("firefox" "ungoogled-chromium" "falkon");
+	packages+=("firefox" "ungoogled-chromium" "falkon" "qutebrowser");
 	#fonts
 	packages+=("ttf-font-awesome" "ttf-roboto" "noto-fonts" "noto-fonts-emoji" "noto-fonts-extra" "noto-fonts-cjk" "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-mono" "ttf-jetbrains-mono" "ttf-liberation");
 	#dev-general
