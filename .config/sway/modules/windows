@@ -26,7 +26,7 @@ for_window {
 	[app_id="i3blocks-media"] resize set width 50ppt height 100ppt, move position 50ppt 0
 
 	[app_id="i3blocks-calendar"] floating enable, sticky enable
-	[app_id="i3blocks-calendar"] resize set width 350px height 100ppt, move position 100ppt 0, move left 350
+	[app_id="i3blocks-calendar"] resize set width 350px height 600px, move position 100ppt 0, move left 350
 
 	[app_id="i3blocks-cpu"] floating enable, sticky enable
 	[app_id="i3blocks-cpu"] resize set width 200px height 200px, move position 100ppt 0, move left 200px
@@ -46,4 +46,6 @@ for_window {
 	[app_id="i3blocks-storage"] floating enable, sticky enable
 	[app_id="i3blocks-storage"] resize set width 300px height 300px, move position 100ppt 0, move left 300px
 
+	[app_id="i3blocks-bookmarks"] floating enable, sticky enable
+	[app_id="i3blocks-bookmarks"] resize set width 600px height 600px, move position 100ppt 0, move left 600
 }
