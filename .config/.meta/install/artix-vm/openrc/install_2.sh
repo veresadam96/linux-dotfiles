@@ -53,7 +53,7 @@ packages() {
 	#pacman support
 	packages+=("reflector" "pacman-contrib");
 	#dm/wm
-	packages+=("polkit" "sway" "swayidle" "swaybg" "swaylock" "i3blocks" "wl-clipboard" "xorg-xwayland" "fuzzel");
+	packages+=("polkit" "sway" "swayidle" "swaybg" "swaylock" "i3blocks" "wl-clipboard" "xorg-xwayland" "fuzzel" "wev");
 	#notificaions
 	packages+=("mako");
 	#OpenGL/Vulkan
