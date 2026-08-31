@@ -45,7 +45,4 @@ for_window {
 
 	[app_id="i3blocks-storage"] floating enable, sticky enable
 	[app_id="i3blocks-storage"] resize set width 300px height 300px, move position 100ppt 0, move left 300px
-
-	[app_id="i3blocks-bookmarks"] floating enable, sticky enable
-	[app_id="i3blocks-bookmarks"] resize set width 600px height 600px, move position 100ppt 0, move left 600
 }
