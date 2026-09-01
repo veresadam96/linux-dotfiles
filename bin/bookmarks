@@ -2,4 +2,6 @@
 BROWS=${BROWSER:-qutebrowser};
 BOOKMARKS_DIR=~/bookmarks;
 RES=$(nnn -o -p - $BOOKMARKS_DIR | xargs -d '\n' grep -oh '^.*$');
-setsid $BROWS $RES >/dev/null 2>&1 &
+if [[ -n "$RES" ]]; then
+	setsid $BROWS $RES >/dev/null 2>&1 &
+fi
