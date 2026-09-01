@@ -38,4 +38,4 @@ bindsym XF86MonBrightnessUp exec \
     && notify-send -c system-parameter "🔆" "$(brightnessctl | grep -m 1 -oE [0-9]+% | head -n 1)" \
     && pkill -SIGRTMIN+1 i3blocks
 
-bindsym XF86Favorites exec foot sh -c "$HOME/bin/bookmarks && sleep 1"
+bindsym XF86Favorites exec foot bash -c "$HOME/bin/bookmarks && sleep 0.1"

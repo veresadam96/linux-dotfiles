@@ -112,7 +112,7 @@ separator_block_width=5
 
 [bookmarks]
 full_text=⭐
-command=foot sh -c "$HOME/bin/bookmarks && sleep 1";
+command=foot bash -c "$HOME/bin/bookmarks && sleep 0.1";
 separator_block_width=5
 
 [network-list]
