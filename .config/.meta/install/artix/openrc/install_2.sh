@@ -65,7 +65,7 @@ packages() {
 	#file system managers
 	packages+=("udisks2");
 	#browsers
-	packages+=("firefox" "qutebrowser");
+	packages+=("firefox");
 	#fonts
 	packages+=("ttf-font-awesome" "ttf-roboto" "noto-fonts" "noto-fonts-emoji" "noto-fonts-extra" "noto-fonts-cjk" "ttf-nerd-fonts-symbols" "ttf-nerd-fonts-symbols-mono" "ttf-jetbrains-mono" "ttf-liberation");
 	#dev-general

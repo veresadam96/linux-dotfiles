@@ -10,6 +10,7 @@ GPG_TTY=$(tty);
 export VISUAL=nvim;
 export EDITOR=nvim;
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH";
+export BROWSER=firefox;
 
 gpg-connect-agent updatestartuptty /bye >/dev/null;
 
