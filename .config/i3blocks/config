@@ -130,8 +130,9 @@ full_text=📁
 command=foot -a i3blocks-storage $HOME/bin/storage;
 separator_block_width=5
 
-[gammastep]
-command=$HOME/.config/i3blocks/gammastep.sh;
+[night-mode]
+full_text=🌗
+command=$HOME/.config/i3blocks/night-mode.sh 1;
 interval=once
 markup=pango
 signal=4

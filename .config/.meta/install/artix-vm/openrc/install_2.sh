@@ -45,7 +45,7 @@ packages() {
 	#audio
 	packages+=("pipewire" "pipewire-alsa" "pipewire-pulse" "pipewire-jack" "wireplumber" "pavucontrol" "mpd-mpris");
 	#screen
-	packages+=("brightnessctl" "grim" "slurp" "gammastep");
+	packages+=("brightnessctl" "grim" "slurp" "wlsunset");
 	#bluetooth
 	packages+=("bluez" "bluez-utils");
 	#terminal emulators

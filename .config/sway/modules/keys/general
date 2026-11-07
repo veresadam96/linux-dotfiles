@@ -23,9 +23,9 @@ bindsym $mod+Shift+c reload
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaymsg exit
 
-# Toggle gammastep
+# Toggle night mode
 bindsym $mod+g exec \
-	button=1 sh $HOME/.config/i3blocks/gammastep.sh \
+	button=1 sh $HOME/.config/i3blocks/night-mode.sh \
 	&& pkill -SIGRTMIN+4 i3blocks
 
 bindsym $mod+p exec foot $HOME/bin/passmenu
