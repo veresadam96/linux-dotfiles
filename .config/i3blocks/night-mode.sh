@@ -7,7 +7,7 @@ current=$(pgrep -a -x wlsunset | awk '{ for (i = 1; i < NF; i++) if ($i == "-o")
 restart() {
 	pkill -x wlsunset
 	while pgrep -x wlsunset >/dev/null; do sleep 0.1; done
-	[ -n "$1" ] && setsid -f wlsunset $1 -t 4500 >/dev/null 2>&1 </dev/null
+	[ -n "$1" ] && setsid -f wlsunset $1 -t 3500 >/dev/null 2>&1 </dev/null
 }
 
 if [ -n "$use_current_wayland_output" ]; then
