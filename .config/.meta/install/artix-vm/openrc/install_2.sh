@@ -105,7 +105,7 @@ packages() {
 	#freedesktop/xdg
 	packages+=("xdg-utils" "xdg-user-dirs" "xdg-desktop-portal-wlr" "xdg-desktop-portal-gtk");
 	#libs
-	packages+=("libbsd" "lib32-mesa" "lib32-mesa-utils" "lib32-vulkan-intel" "libsixel" "libnotify" "lib32-libpulse" "lib32-gnutls");
+	packages+=("libbsd" "lib32-mesa" "lib32-mesa-utils" "lib32-vulkan-intel" "lib32-vulkan-radeon" "libsixel" "libnotify" "lib32-libpulse" "lib32-gnutls");
 	#service scripts
 	packages+=("iwd-openrc" "dhcpcd-openrc" "bluez-openrc" "cronie-openrc" "docker-openrc" "ntp-openrc" "pipewire-openrc" "pipewire-pulse-openrc" "wireplumber-openrc" "openssh-openrc");
 

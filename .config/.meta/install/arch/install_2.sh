@@ -104,7 +104,7 @@ packages() {
 	#gaming
 	packages+=("lutris" "wine" "winetricks");
 	#libs
-	packages+=("libbsd" "lib32-mesa" "lib32-mesa-utils" "lib32-vulkan-intel" "libsixel" "libnotify" "lib32-libpulse" "lib32-gnutls");
+	packages+=("libbsd" "lib32-mesa" "lib32-mesa-utils" "lib32-vulkan-intel" "lib32-vulkan-radeon" "libsixel" "libnotify" "lib32-libpulse" "lib32-gnutls");
 	#torrent
 	packages+=("transmission-gtk");
 	#printer
