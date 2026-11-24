@@ -55,6 +55,7 @@
 !/bin/storage
 !/bin/svndiffwrap.sh
 !/bin/temperature
+!/bin/start-fluidsynth
 
 !/work
 /work/*

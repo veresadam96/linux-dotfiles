@@ -45,7 +45,7 @@ packages() {
 	#internet
 	packages+=("iwd" "dhcpcd" "openvpn" "openssh" "sshfs" "traceroute" "wget" "impala" "openresolv" "samba");
 	#audio
-	packages+=("pipewire" "pipewire-alsa" "pipewire-pulse" "pipewire-jack" "wireplumber" "pavucontrol" "mpd-mpris");
+	packages+=("pipewire" "pipewire-alsa" "pipewire-pulse" "pipewire-jack" "wireplumber" "pavucontrol" "mpd-mpris" "soundfont-fluid" "alsa-utils");
 	#screen
 	packages+=("brightnessctl" "grim" "slurp" "wlsunset");
 	#bluetooth

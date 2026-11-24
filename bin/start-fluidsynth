@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+/bin/fluidsynth -a pipewire -m alsa_seq -i -s -g 1.0 /usr/share/soundfonts/FluidR3_GM.sf2 &
