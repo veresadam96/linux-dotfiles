@@ -164,6 +164,10 @@ function M.bufview_keymaps()
 	keymap_set("n", "<c-b>", "<esc>:Bufview<cr>", { noremap = true })
 end
 
+function M.diffview_keymaps()
+	keymap_set("n", "<leader>dv", "<esc>:Diffview<cr>", { noremap = true })
+end
+
 function M.bufdel_keymaps()
 	keymap_set("n", "<leader>db", "<esc>:Bufdel<cr>", { noremap = true })
 	keymap_set("n", "<c-d>", "<esc>:Bufdel<cr>", { noremap = true })
