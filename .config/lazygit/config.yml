@@ -1,0 +1,4 @@
+os:
+  editInTerminal: false
+  edit: 'f=$(realpath {{filename}}); nvim --server "$NVIM" --remote-expr "v:lua.LazygitOpen(\"$f\")"'
+  editAtLine: 'f=$(realpath {{filename}}); nvim --server "$NVIM" --remote-expr "v:lua.LazygitOpen(\"$f\", {{line}})"'
