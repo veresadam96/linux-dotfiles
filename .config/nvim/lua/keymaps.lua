@@ -168,6 +168,10 @@ function M.diffview_keymaps()
 	keymap_set("n", "<leader>dv", "<esc>:Diffview<cr>", { noremap = true })
 end
 
+function M.lazygit_keymaps()
+	keymap_set("n", "<leader>lg", "<esc>:Lazygit<cr>", { noremap = true })
+end
+
 function M.bufdel_keymaps()
 	keymap_set("n", "<leader>db", "<esc>:Bufdel<cr>", { noremap = true })
 	keymap_set("n", "<c-d>", "<esc>:Bufdel<cr>", { noremap = true })
